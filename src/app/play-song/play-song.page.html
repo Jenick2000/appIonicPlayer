@@ -1,0 +1,115 @@
+ <ion-header>
+  <ion-toolbar class="new-background-color">
+    <ion-buttons slot="start">
+      <ion-icon name="arrow-back" style="font-size: 25px;" (click)="backClicked()"></ion-icon >
+    </ion-buttons>
+    <marquee behavior="scroll" direction="left" scrollamount="2" style="color:white">{{song.Name}} - {{song.Singer}}</marquee>
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon slot="icon-only" name="stopwatch" color="light"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+  </ion-toolbar>
+</ion-header> 
+<ion-content>
+  <div class="content">
+    <ion-row>
+      <ion-col size="12" class="ion-text-center">
+        <ion-label color="light"> Jenick'JK</ion-label> <ion-icon color="light" name="musical-note"></ion-icon>
+      </ion-col>
+      <ion-col size="12">
+        <div id="album-art" [ngClass]="{'active': songsService.isPlaying}">
+          <img [src]="song.image" class="active" >
+          <div id="buffer-box">Buffering ...</div>
+      </div>
+      </ion-col>
+    </ion-row>
+    <ion-row slot="bottom" class="control">
+      
+      <ion-col size="12" > 
+        <ion-range #range [(ngModel)]="songsService.process"  color="success" max="100" (mouseup)="seek()" (touchend)="seek()">
+          <ion-label slot="start" color="light" >{{songsService.currentTime}}</ion-label>
+          <ion-label slot="end"  color="light">{{songsService.duration}}</ion-label>
+        </ion-range>
+      </ion-col>
+      <ion-col size="12" class="ion-text-center " style="margin-bottom: 40px;" >
+        <ion-button fill="clear" color="light" (click)="prev()">
+          <ion-icon slot="icon-only" name="skip-backward"></ion-icon>
+        </ion-button>
+
+        <ion-button fill="clear" style="width: 90px;" color="light" *ngIf="!songsService.isPlaying" (click)="togglePlay(false)">
+          <ion-icon slot="icon-only" name="play"></ion-icon>
+        </ion-button>
+
+        <ion-button fill="clear" style="width: 90px;" color="light"*ngIf="songsService.isPlaying" (click)="togglePlay(true)">
+          <ion-icon slot="icon-only" name="pause"></ion-icon>
+        </ion-button>
+
+        <ion-button fill="clear" color="light" (click)="next()">
+          <ion-icon slot="icon-only" name="skip-forward"></ion-icon>
+        </ion-button>
+      </ion-col>
+      <ion-col size="12" class="ion-text-center controll-song" >
+        <ion-button fill="clear" color="light" >
+          <ion-icon name="headset"></ion-icon>
+        </ion-button>
+        <ion-button fill="clear" color="light" >
+          <ion-icon name="shuffle"></ion-icon>
+        </ion-button>
+       
+        <ion-button fill="clear" color="light" >
+          <ion-icon name="heart-empty"></ion-icon>
+        </ion-button>
+        <ion-button fill="clear" color="light" >
+          <ion-icon name="repeat"></ion-icon>
+        </ion-button>
+       
+        <ion-button fill="clear" color="light" >
+          <ion-icon name="help-circle-outline"></ion-icon>
+        </ion-button>
+      </ion-col>
+      <ion-col size="12" class="ion-text-center">
+       
+          <ion-range [(ngModel)]="songsService.volumeValue" pin min="0" max="100" color="success" (mouseup)="volume()" (touchend)="volume()">
+            <ion-icon slot="start" color="light" name="volume-low"></ion-icon>
+            <ion-icon slot="end" name="volume-high" color="light"></ion-icon>
+          </ion-range>
+
+
+      </ion-col>
+    </ion-row>
+  </div>
+</ion-content>
+
+ <!-- <ion-footer *ngIf="songsService.player" >
+  <div class="footer">
+  <ion-toolbar color="#633ce0">
+    <ion-row>
+      <ion-col size="12" class="ion-text-center">
+        <h4>{{song.Name}}</h4>
+        <p>{{song.Singer}}</p>
+      </ion-col>
+      <ion-col size="12">
+        <ion-range #range [(ngModel)]="songsService.process"  color="success" max="100" (mouseup)="seek()" (touchend)="seek()"></ion-range>
+      </ion-col>
+      <ion-col size="12" class="ion-text-center" >
+        <ion-button fill="clear" color="light" (click)="prev()">
+          <ion-icon slot="icon-only" name="skip-backward"></ion-icon>
+        </ion-button>
+
+        <ion-button fill="clear" color="light" *ngIf="!songsService.isPlaying" (click)="togglePlay(false)">
+          <ion-icon slot="icon-only" name="play"></ion-icon>
+        </ion-button>
+
+        <ion-button fill="clear" color="light"*ngIf="songsService.isPlaying" (click)="togglePlay(true)">
+          <ion-icon slot="icon-only" name="pause"></ion-icon>
+        </ion-button>
+
+        <ion-button fill="clear" color="light" (click)="next()">
+          <ion-icon slot="icon-only" name="skip-forward"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+  </div>
+</ion-footer>  -->
